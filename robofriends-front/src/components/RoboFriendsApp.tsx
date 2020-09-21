@@ -6,8 +6,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import CardList from "./CardList";
-import {RobotCardTs} from "./robofriend";
-import {requestRobots, setSearchFieldAction} from "./redux/actions";
+import {RobotCardTs} from "./robofriendTypes";
+import {requestRobots, setSearchFieldAction} from "../redux/actions";
 
 const mapStateToProps = (state: any) => {
     return {

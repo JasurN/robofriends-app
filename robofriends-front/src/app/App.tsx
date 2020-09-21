@@ -1,8 +1,8 @@
 import React from 'react';
-import RoboFriendsApp from "./robo_friedns_app/RoboFriendsApp";
+import RoboFriendsApp from "../components/RoboFriendsApp";
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, combineReducers} from "redux";
-import {searchRobotsReducers, requestRobotsReducers} from "./robo_friedns_app/redux/reducers";
+import {searchRobotsReducers, requestRobotsReducers} from "../redux/reducers";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import logger from "redux-logger";
 import thunkMiddleware from 'redux-thunk';

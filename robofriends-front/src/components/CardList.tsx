@@ -1,7 +1,7 @@
 import {createStyles, Grid} from "@material-ui/core";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {RobotCardListProps, RobotCardTs} from "./robofriend";
+import {RobotCardListProps, RobotCardTs} from "./robofriendTypes";
 import RobotCard from "./RobotCard";
 
 const useStyles = makeStyles(() =>

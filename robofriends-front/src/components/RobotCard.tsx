@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import {createStyles, Grid} from "@material-ui/core";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {RobotCardTs} from "./robofriend";
+import {RobotCardTs} from "./robofriendTypes";
 import CardMedia from "@material-ui/core/CardMedia";
 import Box from "@material-ui/core/Box";
 
