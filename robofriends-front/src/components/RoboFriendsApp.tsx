@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './RoboFriendsApp.css'
 import {createStyles, Grid} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -8,13 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import CardList from "./CardList";
 import {RobotCardTs} from "./robofriendTypes";
 import {requestRobots, setSearchFieldAction} from "../redux/actions";
-
-const mapStateToProps = (state: any) => {
-    return {
-        searchField: state.searchRobotsReducers.searchField,
-        robots: state.requestRobotsReducers.robots
-    }
-}
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -37,17 +30,29 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-interface RoboFriendProps {
-    searchField: string,
-    dispatch: any,
-    robots: []
+interface RootState {
+    requestRobotsReducers: {
+        robots: [],
+    },
+    searchRobotsReducers: {
+        searchField: string,
+    }
+
 }
 
-function RoboFriendsApp({searchField, dispatch, robots}: RoboFriendProps) {
+function RoboFriendsApp() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const robots1 = (state: RootState) => state.requestRobotsReducers.robots;
+    const robots = useSelector(robots1);
+
+    const searchFieldSelector = (state: RootState) => state.searchRobotsReducers.searchField;
+    const searchField = useSelector(searchFieldSelector);
+
     useEffect(() => {
         requestRobots(dispatch);
-    });
+    }, [dispatch]);
 
     function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
         dispatch(setSearchFieldAction(event.target.value));
@@ -60,7 +65,7 @@ function RoboFriendsApp({searchField, dispatch, robots}: RoboFriendProps) {
                 direction="row"
                 justify="center"
             >
-                {robots.length > 0 ? (
+                {robots && robots.length > 0 ? (
                         <>
                             <Grid item>
                                 <Typography variant="h3" className={classes.mainTitle}>
@@ -70,7 +75,7 @@ function RoboFriendsApp({searchField, dispatch, robots}: RoboFriendProps) {
                                            variant="filled" onChange={handleOnChange}/>
                             </Grid>
                             <CardList robots={robots.filter((robot: RobotCardTs) => {
-                                if (searchField.length) {
+                                if (searchField && searchField.length) {
                                     if (robot.name.toLowerCase().includes(searchField.toLowerCase())) {
                                         return robot
                                     }
@@ -95,4 +100,4 @@ function RoboFriendsApp({searchField, dispatch, robots}: RoboFriendProps) {
     )
 }
 
-export default connect(mapStateToProps,)(RoboFriendsApp);
+export default RoboFriendsApp;

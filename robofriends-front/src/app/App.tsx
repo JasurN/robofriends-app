@@ -4,7 +4,6 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, combineReducers} from "redux";
 import {searchRobotsReducers, requestRobotsReducers} from "../redux/reducers";
 import {composeWithDevTools} from 'redux-devtools-extension';
-import logger from "redux-logger";
 import thunkMiddleware from 'redux-thunk';
 
 const rootReducer = combineReducers({
@@ -12,7 +11,7 @@ const rootReducer = combineReducers({
 })
 
 const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(logger, thunkMiddleware),
+    applyMiddleware( thunkMiddleware),
 ))
 
 function App() {
