@@ -39,8 +39,10 @@ interface RootState {
     }
 
 }
+type Props = {
 
-function RoboFriendsApp() {
+};
+export const RoboFriendsApp: React.FC<Props> = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 

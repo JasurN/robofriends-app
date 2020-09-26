@@ -1,18 +1,17 @@
 import React from 'react';
 import RoboFriendsApp from "../components/RoboFriendsApp";
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, combineReducers} from "redux";
+import {combineReducers} from "redux";
 import {searchRobotsReducers, requestRobotsReducers} from "../redux/reducers";
-import {composeWithDevTools} from 'redux-devtools-extension';
-import thunkMiddleware from 'redux-thunk';
+import {configureStore} from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
     searchRobotsReducers, requestRobotsReducers
 })
 
-const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware( thunkMiddleware),
-))
+const store = configureStore({
+    reducer: rootReducer,
+});
 
 function App() {
     return (
