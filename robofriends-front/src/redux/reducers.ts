@@ -1,28 +1,10 @@
 import {
-    CHANGE_SEARCH_FIELD, REQUEST_ROBOTS_FAILED,
+    REQUEST_ROBOTS_FAILED,
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     requestRobotsType,
-    SearchActionType,
-    SearchState
 } from "./types";
 
-const initialStateSearch: SearchState = {
-    searchField: ''
-};
-
-export const searchRobotsReducers = (state = initialStateSearch,
-                                     action: SearchActionType) => {
-    switch (action.type) {
-        case CHANGE_SEARCH_FIELD:
-            return {
-                ...state,
-                searchField: action.payload
-            }
-        default:
-            return state
-    }
-}
 
 const initialStateRobots = {
     isPending: false,
