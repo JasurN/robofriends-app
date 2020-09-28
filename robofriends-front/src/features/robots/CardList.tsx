@@ -1,8 +1,8 @@
 import { createStyles, Grid } from '@material-ui/core'
 import React from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import { RobotCardListProps, RobotCardTs } from './robofriendTypes'
 import RobotCard from './RobotCard'
+import { Robot, Robots } from './robotsSlice'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() =>
   })
 )
 
-export default function CardList(props: RobotCardListProps) {
+export default function CardList(props: Robots) {
   const classes = useStyles()
 
   return (
@@ -39,7 +39,7 @@ export default function CardList(props: RobotCardListProps) {
       className={classes.cardContainer}
       style={{ borderTop: '5px solid black' }}
     >
-      {props.robots.map((robot: RobotCardTs) =>
+      {props.robots.map((robot: Robot) =>
 
         <RobotCard key={robot.id} id={robot.id} name={robot.name} email={robot.email} />
       )}

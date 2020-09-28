@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { requestRobotsReducers } from '../redux/reducers'
+import robotsReducer from '../features/robots/robotsSlice'
 
 const rootReducer = combineReducers({
-  requestRobotsReducers
+  robots: robotsReducer
 })
 export type RootState = ReturnType<typeof rootReducer>
 

@@ -6,8 +6,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import CardList from '../features/robots/CardList'
-import { RobotCardTs } from '../features/robots/robofriendTypes'
-import { requestRobots } from '../redux/actions'
+import { fetchIssue, Robot } from '../features/robots/robotsSlice'
+import { RootState } from './rootReducer'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,23 +30,17 @@ const useStyles = makeStyles(() =>
   })
 )
 
-interface RootState {
-  requestRobotsReducers: {
-    robots: [],
-  },
-}
-
 type Props = {};
 export const App: React.FC<Props> = () => {
   const [searchField, setSearchField] = useState('')
   const classes = useStyles()
   const dispatch = useDispatch()
 
-  const robots1 = (state: RootState) => state.requestRobotsReducers.robots
-  const robots = useSelector(robots1)
+  const robotsSelector = (state: RootState) => state.robots.robots
+  const robots = useSelector(robotsSelector)
 
   useEffect(() => {
-    requestRobots(dispatch)
+    dispatch(fetchIssue())
   }, [dispatch])
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -69,7 +63,7 @@ export const App: React.FC<Props> = () => {
                 <TextField id="filled-basic" className={classes.searchField} label="search robots"
                            variant="filled" onChange={handleOnChange} />
               </Grid>
-              <CardList robots={robots.filter((robot: RobotCardTs) => {
+              <CardList robots={robots.filter((robot: Robot) => {
                 if (searchField && searchField.length) {
                   if (robot.name.toLowerCase().includes(searchField.toLowerCase())) {
                     return robot
@@ -89,7 +83,6 @@ export const App: React.FC<Props> = () => {
             </Grid>
           )
         }
-
       </Grid>
     </div>
   )
